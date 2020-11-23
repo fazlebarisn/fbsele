@@ -86,7 +86,7 @@ final class FbseleWidget {
     * @since 1.0.0
     */
     public function i18n() {
-       load_plugin_textdomain( 'fbs-elementor-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+       load_plugin_textdomain( 'fbsele', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
     }
 
     /**
@@ -94,6 +94,13 @@ final class FbseleWidget {
     * @since 1.0.0
     */
     public function init() {
+
+        // Check if the ELementor installed and activated
+        if( ! did_action( 'elementor/loaded' ) ) {
+            add_action( 'admin_notices', [ $this, 'AdminNoticeMissingMainPlugin' ] );
+            return;
+        }
+
         add_action( 'elementor/init', [ $this, 'initCategory' ] );
         add_action( 'elementor/widgets/widgets_registered', [ $this, 'initWidgets' ] );
     }
@@ -119,6 +126,23 @@ final class FbseleWidget {
             1
         );
     }
+
+    /**
+    * Admin Notice
+    * Warning when the site doesn't have Elementor installed or activated
+    * @since 1.0.0
+    */
+    public function AdminNoticeMissingMainPlugin() {
+        if( isset( $_GET[ 'activate' ] ) ) unset( $_GET[ 'activate' ] );
+        $message = sprintf(
+            esc_html__( '"%1$s" requires "%2$s" to be installed and activated', 'my-elementor-widget' ),
+            '<strong>'.esc_html__( 'Fbs Elementor Add On', 'my-elementor-widget' ).'</strong>',
+            '<strong>'.esc_html__( 'Elementor', 'my-elementor-widget' ).'</strong>'
+        );
+
+        printf( '<div class="notice notice-warning is-dimissible"><p>%1$s</p></div>', $message );
+    }
+
 
 }
 
