@@ -135,9 +135,43 @@ final class FbseleWidget {
     public function AdminNoticeMissingMainPlugin() {
         if( isset( $_GET[ 'activate' ] ) ) unset( $_GET[ 'activate' ] );
         $message = sprintf(
-            esc_html__( '"%1$s" requires "%2$s" to be installed and activated', 'my-elementor-widget' ),
-            '<strong>'.esc_html__( 'Fbs Elementor Add On', 'my-elementor-widget' ).'</strong>',
-            '<strong>'.esc_html__( 'Elementor', 'my-elementor-widget' ).'</strong>'
+            esc_html__( '"%1$s" requires "%2$s" to be installed and activated', 'fbsele' ),
+            '<strong>'.esc_html__( 'Fbs Elementor Add On', 'fbsele' ).'</strong>',
+            '<strong>'.esc_html__( 'Elementor', 'fbsele' ).'</strong>'
+        );
+
+        printf( '<div class="notice notice-warning is-dimissible"><p>%1$s</p></div>', $message );
+    }
+
+    /**
+    * Admin Notice
+    * Warning when the site doesn't have a minimum required Elementor version.
+    * @since 1.0.0
+    */
+    public function admin_notice_minimum_elementor_version() {
+        if( isset( $_GET[ 'activate' ] ) ) unset( $_GET[ 'activate' ] );
+        $message = sprintf(
+            esc_html__( '"%1$s" requires "%2$s" version %3$s or greater', 'my-elementor-widget' ),
+            '<strong>'.esc_html__( 'My Elementor Widget', 'my-elementor-widget' ).'</strong>',
+            '<strong>'.esc_html__( 'Elementor', 'my-elementor-widget' ).'</strong>',
+            self::MINIMUM_ELEMENTOR_VERSION
+        );
+
+        printf( '<div class="notice notice-warning is-dimissible"><p>%1$s</p></div>', $message );
+    }
+
+    /**
+    * Admin Notice
+    * Warning when the site doesn't have a minimum required PHP version.
+    * @since 1.0.0
+    */
+    public function admin_notice_minimum_php_version() {
+        if( isset( $_GET[ 'activate' ] ) ) unset( $_GET[ 'activate' ] );
+        $message = sprintf(
+            esc_html__( '"%1$s" requires "%2$s" version %3$s or greater', 'my-elementor-widget' ),
+            '<strong>'.esc_html__( 'My Elementor Widget', 'my-elementor-widget' ).'</strong>',
+            '<strong>'.esc_html__( 'PHP', 'my-elementor-widget' ).'</strong>',
+            self::MINIMUM_PHP_VERSION
         );
 
         printf( '<div class="notice notice-warning is-dimissible"><p>%1$s</p></div>', $message );
