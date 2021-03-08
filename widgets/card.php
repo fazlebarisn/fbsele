@@ -1,5 +1,6 @@
 <?php
 namespace Elementor;
+
 class FbseleExampleWidget extends Widget_Base {
 
     public function get_name() {
@@ -30,7 +31,7 @@ class FbseleExampleWidget extends Widget_Base {
         $this->start_controls_section(
             'header_section',
             [
-                'label' => __( 'Header', 'fbsele' ),
+                'label' => __( 'Title', 'fbsele' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -44,11 +45,20 @@ class FbseleExampleWidget extends Widget_Base {
     private function style_tab() {}
 
     protected function render() {
+
         $settings = $this->get_settings_for_display();
         ?>
-        <div>
-            <h1>Hello There</h1>
-        </div>
+            <div class="card">
+
+                <img src="<?php echo plugin_dir_url( dirname( __FILE__ ) ) . 'assets/images/img_avatar.png'; ?>" alt="Avatar" style="width:100%">
+
+                <div class="container">
+                    <h4><b>John Doe</b></h4>
+                    <p>Architect & Engineer</p>
+                </div>
+
+            </div>
+
         <?php
     }
 

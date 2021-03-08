@@ -55,6 +55,7 @@ final class FbseleWidget {
     public function __construct() {
         // Call Constants Method
         $this->FbseleWidget();
+
         add_action( 'wp_enqueue_scripts', [ $this, 'fbslele_style_script' ] );
         add_action( 'init', [ $this, 'i18n' ] );
         add_action( 'plugins_loaded', [ $this, 'init' ] );
@@ -74,8 +75,8 @@ final class FbseleWidget {
     * @since 1.0.0
     */
     public function fbslele_style_script() {
-        wp_register_style( 'fbsele-style', FBSELE_PLUGIN_URL . 'assets/css/public.css', [], rand(), 'all' );
-        wp_register_script( 'fbsele-script', FBSELE_PLUGIN_URL . 'assets/js/public.js', [ 'jquery' ], rand(), true );
+        wp_register_style( 'fbsele-style', FBSELE_PLUGIN_URL . 'assets/source/css/public.css', [], rand(), 'all' );
+        wp_register_script( 'fbsele-script', FBSELE_PLUGIN_URL . 'assets/source/js/public.js', [ 'jquery' ], rand(), true );
 
         wp_enqueue_style( 'fbsele-style' );
         wp_enqueue_script( 'fbsele-script' );
@@ -110,7 +111,7 @@ final class FbseleWidget {
     * @since 1.0.0
     */
     public function initWidgets() {
-        require_once FBSELE_PLUGIN_PATH . '/widgets/example.php';
+        require_once FBSELE_PLUGIN_PATH . '/widgets/card.php';
     }
 
     /**
